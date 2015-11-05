@@ -4,27 +4,28 @@ Plugin Name: groovy-movies
 Description:    Create a custom post type called Movies 
 Version:        1.0
 Author:         Patrick Martin
+Text Domain:    groovy-movies
 */
 
 // Register Movie Post Type
-function wpdocs_codex_custom_init() {
+function pmgm_reg_post_movies() {
     $args = array(
         'public' => true,
-        'label'  => __( 'Movies' ),
+        'label'  => __( 'Movies', 'groovy-movies' ),
     );
 
     register_post_type( 'movies', $args );
 }
-add_action( 'init', 'wpdocs_codex_custom_init' );
+add_action( 'init', 'pmgm_reg_post_movies' );
 
 // Register 'genre' taxonomy
-function wpdocs_create_genre() {
+function pmgm_reg_tax_genre() {
     register_taxonomy( 'genre', array( 'movies' ),
         array(
-            'label' => __( 'Genre' ),
+            'label' => __( 'Genre', 'groovy-movies' ),
             'rewrite' => array( 'slug' => 'genre' ),
             'hierarchical' => true, 
         )
     );
 }
-add_action( 'init', 'wpdocs_create_genre' );
+add_action( 'init', 'pmgm_reg_tax_genre' );
